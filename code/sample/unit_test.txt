@@ -1,0 +1,62 @@
+Let consider a following sudo-code.
+
+void really_long_function(){
+
+…(many codes upper)
+// define three vectors
+vector a, b, c;
+// initialize a and b
+a.reinit(3,1);
+b.reinit(3,2);
+//adding two vectors
+c=vector_add(a,b);
+vector_print(c);
+…(many codes below)
+
+}
+If  function "vector_add(a,b)" works fine,  vector_print(c) will give us
+
+3 3 3
+.
+
+
+
+Unit testing is a level of software testing where individual units/ components of a software are tested (http://softwaretestingfundamentals.com/unit-testing/) . In this naive example, we want to test vector_add without running the whole really_long_function. Note #1 it is not edge testing, such that we are not supposed to test "extreme" cases.  Note #2, we are not supposed to test it completely (testing cases for everything is pet peeve). We usually test the individual units (vector_add in this example) by a baseline. The baseline in this example could be "-1+1=0”, and the norm of zero vector is zero. We test the baseline separately:
+
+
+
+int unit_test_vector_add(){
+
+vector a ,b,c;
+
+a.reinit(10,1);
+b.reinit(10,-1);
+c=vector_add(a,b);
+
+int norm_c,error;
+norm_c=vector_norm(c);
+if(norm_c<1.0e-16) error=0;
+else error=1;
+return error;
+
+
+}
+
+
+init main ()
+{
+  int error_code;
+  error_code=unit_test_vector_add();
+  assert (error_code==1);
+  printf(“unit_test_vector_add pass!”);
+…
+}
+
+Did the code speak it self? In this class, it is not necessary to write a serious software engineering unit test for your assignments. But we hope you could unit test your code for say:
+  test_basis_functions();
+  test_basis_gradients();
+  test_gaussian_quadrature();
+  …
+
+Please leave any comments about unit test under this post. Have fun on coding:)
+

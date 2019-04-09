@@ -1,0 +1,8 @@
+/home/dianawww/ME505/CA5/runs/code/CMakeFiles/debug.dir
+/home/dianawww/ME505/CA5/runs/code/CMakeFiles/distclean.dir
+/home/dianawww/ME505/CA5/runs/code/CMakeFiles/info.dir
+/home/dianawww/ME505/CA5/runs/code/CMakeFiles/main5.dir
+/home/dianawww/ME505/CA5/runs/code/CMakeFiles/release.dir
+/home/dianawww/ME505/CA5/runs/code/CMakeFiles/run.dir
+/home/dianawww/ME505/CA5/runs/code/CMakeFiles/runclean.dir
+/home/dianawww/ME505/CA5/runs/code/CMakeFiles/strip_comments.dir

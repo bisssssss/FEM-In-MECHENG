@@ -1,0 +1,129 @@
+https://www.dealii.org/8.4.1/doxygen/deal.II/classFE__Q.html
+
+Caen linux:
+https://caen.engin.umich.edu/connect/linux-login-service/
+
+Duo:
+https://www.safecomputing.umich.edu/two-factor-authentication
+Caen VNC:
+http://caenfaq.engin.umich.edu/12374-Linux-Login-Service/how-do-i-connect-to-a-caen-linux-computer-remotely
+
+
+
+==================================================================================================================================
+Basic command line (use tab wisely):
+$ module load deal.II      (load deal.II, need to do every time!)
+$ module list		   (list the modules you loaded)
+$ ls			   (show files and folders under current directory)
+$ pwd		           (show current directory)
+$ cd	                    ( go to root directory)
+$ cd /home/wzhenlin/ME505/femHWTemplates/CodingAssgn1/   ( go to /home/wzhenlin/ME505/femHWTemplates/CodingAssgn1/)
+$ cd ../			( go to up folder)
+$ cd CodingAssgn1/	         ( go to up current_directory/CodingAssgn1)
+$ cmake CMakeLists.txt		(use CMakeLists.txt to generate Makefile)
+$ make				(compiling)
+$ make run			(compiling and run the exe)
+$ ./main1			(run the exe e.g. main1)
+
+
+//////// you can just double click the file you want to edit 
+$ emacs main1.cc		(use emacs to open main1.cc in terminal)
+$ vim main1.cc			(use vim to open main1.cc in terminal)
+
+
+//////// more command line, if you are interested  
+$ cp				
+$ rm 
+$ mkdir
+…
+
+
+
+==================================================================================================================================
+Using deal.ii on CAEN
+
+$module load deal.II
+
+
+If you use deal.ii on CAEN, nothing need to know beyond here
+==================================================================================================================================
+
+==================================================================================================================================
+Install Deal.ii on your own linux system like Ubuntu or on CAEN:
+
+download deal.ii: http://www.dealii.org/download.html
+move the .gz file to a proper directory say /home/uniquename
+
+In terminal, 
+$ cd  
+$ tar xvzf dealii-8.5.1.tar.gz
+$ cd dealii-8.5.1
+(open README.md and follow it to install deal.ii)
+$ mkdir install
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=/home/wzhenlin/dealii-8.5.1/install/ ..
+$ make -j 8 install
+
+
+
+
+set environmental variables:
+option 1 in CMakeLists.txt :
+SET(ENV{DEAL_II_DIR} "/home/wzhenlin/dealii-8.5.1/install/") 
+
+#SET(ENV{DEAL_II_DIR} "/home/wzhenlin/dealii-8.5.1/install/")
+FIND_PACKAGE(deal.II 8.0 QUIET
+  HINTS ${deal.II_DIR} ${DEAL_II_DIR} ../ ../../ $ENV{DEAL_II_DIR}
+  )
+“
+
+# will comment it out, so delete it.
+option 2: export DEAL_II_DIR=/home/wzhenlin/dealii-8.5.1/install/   in ~/.bashrc
+
+
+
+==================================================================================================================================
+Use deal.ii on mac (not even recommended for latest version) 
+
+error1 ( 10.12.6, with Xcode 9.2) :
+No rule to make target `/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/Accelerate.framework', needed by `try'.  Stop.
+
+
+Solution:
+rename MacOSX10.13.sdk to MacOSX10.12.sdk (create a symbolic link) 
+delete all compiling file, and compile again. (you will get some error)
+rename MacOSX10.12.sdk back to MacOSX10.13.sdk
+recompile it (do not delete compiling file!!)
+
+You will have a warning but that is ok.
+
+Alternately you can do it without leaving terminal:
+ 
+$ rm -rf CMakeCache.txt CMakeFiles/ cmake_install.cmake Makefile
+$ cmake CMmakeLists.txt$ make
+$ sudo rm /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk
+$ make run
+
+
+
+
+error2:
+“PMIx has detected a temporary directory name that results
+in a path that is too long for the Unix domain socket:
+
+    Temp dir: /var/folders/vd/tfhc6zrj7qn26568m1_vwvxm0000gn/T/openmpi-sessions-501@zhenlins-MacBook-Pro_0/28374
+
+Try setting your TMPDIR environmental variable to point to
+something shorter in length
+
+
+Solution:
+export TMPDIR=~/tmp-ffmpeg
+
+
+
+
+
+
+
